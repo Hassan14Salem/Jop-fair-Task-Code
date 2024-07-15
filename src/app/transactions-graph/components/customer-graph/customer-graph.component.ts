@@ -30,7 +30,7 @@ export class CustomerGraphComponent implements  AfterViewInit, OnChanges, OnDest
   {
     this._customerService.getAllTransactionsMain().subscribe({
       next:(Response ) => {
-        this.AllTransactions = Response
+        this.AllTransactions = Response.transactions
 
         this.getCustomerTransactionsById()
       }

@@ -24,7 +24,8 @@ getAllCustomers()
 {
   this._CustomerService.getAllCustomersMain().subscribe({
     next:(Response) => {
-this.customers = Response;
+this.customers = Response.customers;
+console.log(this.customers)
     }
   })
 }
@@ -33,14 +34,11 @@ getAllTransactions()
 {
   this._CustomerService.getAllTransactionsMain().subscribe({
     next:(Response) => {
-this.transactions = Response;
+this.transactions = Response.transactions;
     }
   })
 }
-searchByAmount(): any[] {
 
-  return this.transactions.filter(t => t.amount.toString().includes(this.searchValue));
-}
 
 
 
@@ -48,7 +46,6 @@ calculateTransactionAmounts(): void {
   this._CustomerService.getAmountsByCustomer().subscribe(amounts => {
     this.customerAmounts = amounts;
   });
-
 }
 
 getTotalAmount(customerId: number): number {

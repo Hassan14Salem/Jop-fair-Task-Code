@@ -11,12 +11,13 @@ export class CustomerService {
 
   getAllCustomersMain():Observable<any>
   {
-    return this.http.get("http://localhost:3000/customers")
+    
+    return this.http.get("assets/db.json")
   }
 
   getAllTransactionsMain():Observable<any>
   {
-    return this.http.get("http://localhost:3000/transactions")
+    return this.http.get("assets/db.json")
   }
 
 
@@ -25,7 +26,7 @@ export class CustomerService {
       map(transactions => {
         const amountsMap = new Map<number, number>();
 
-        transactions.forEach((transaction: { customer_id: number; amount: number; }) => {
+        transactions.transactions.forEach((transaction: { customer_id: number; amount: number; }) => {
           const currentTotal = amountsMap.get(transaction.customer_id) || 0;
           amountsMap.set(transaction.customer_id, currentTotal + transaction.amount);
         });
@@ -35,7 +36,6 @@ export class CustomerService {
         amountsMap.forEach((totalAmount, customerId) => {
           amounts.push({ customerId, totalAmount });
         });
-        console.log(`Hi from Service ${amounts  }`)
 
         return amounts;
       })
